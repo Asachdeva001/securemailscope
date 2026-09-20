@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+
+# Databases & Runtime Data
+*.db
+*.sqlite3
+backend/securemailscope.db
+backend/data/pcaps/*
+backend/data/reports/*
+!backend/data/pcaps/.gitkeep
+!backend/data/reports/.gitkeep
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.next/
+*.log
+
+# Environment Variables & Secrets
+.env
+.env.local
+*.pem
+*.key

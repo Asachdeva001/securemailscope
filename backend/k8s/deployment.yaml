@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: securemailscope-backend
+  namespace: default
+  labels:
+    app: securemailscope-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: securemailscope-backend
+  template:
+    metadata:
+      labels:
+        app: securemailscope-backend
+    spec:
+      containers:
+      - name: backend
+        image: us-central1-docker.pkg.dev/YOUR_GCP_PROJECT_ID/securemailscope/backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: ENABLE_GCP_INTEGRATION
+          value: "true"
+        - name: PORT
+          value: "8000"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: securemailscope-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: securemailscope-backend

@@ -1,0 +1,32 @@
+steps:
+  # 1. Build Container Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/securemailscope/backend:$COMMIT_SHA', '.']
+
+  # 2. Run Automated Pytest Suite
+  - name: '$_LOCATION-docker.pkg.dev/$PROJECT_ID/securemailscope/backend:$COMMIT_SHA'
+    entrypoint: 'pytest'
+    args: ['tests/']
+
+  # 3. Push Image to GCP Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/securemailscope/backend:$COMMIT_SHA']
+
+  # 4. Deploy to GCP Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'securemailscope-backend'
+      - '--image=$_LOCATION-docker.pkg.dev/$PROJECT_ID/securemailscope/backend:$COMMIT_SHA'
+      - '--region=$_LOCATION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=ENABLE_GCP_INTEGRATION=true,GCP_PROJECT_ID=$PROJECT_ID'
+
+substitutions:
+  _LOCATION: 'us-central1'
+
+images:
+  - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/securemailscope/backend:$COMMIT_SHA'
