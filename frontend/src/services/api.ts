@@ -115,5 +115,11 @@ export const api = {
 
   getReportDownloadUrl: (reportId: string): string => {
     return `${API_BASE_URL}/reports/${reportId}`;
+  },
+
+  // Sensor Architecture
+  getSensorStatus: async () => {
+    const res = await axios.get(`${API_BASE_URL}/evidence/sensor/status`);
+    return res.data;
   }
 };
