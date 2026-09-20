@@ -82,25 +82,25 @@ export const Findings: React.FC = () => {
   return (
     <div className="p-4 md:p-6 space-y-4 font-mono text-xs">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-cyber-border pb-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
         <div>
-          <h1 className="text-base font-bold text-slate-100 uppercase tracking-wide flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-red-400" /> FINDINGS & CRYPTOGRAPHIC VULNERABILITIES
+          <h1 className="text-base font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide flex items-center gap-2">
+            <ShieldAlert className="w-4 h-4 text-rose-600 dark:text-red-400" /> FINDINGS & CRYPTOGRAPHIC VULNERABILITIES
           </h1>
-          <p className="text-slate-400 text-[11px] mt-0.5">High-density vulnerability triage table for SOC analysts & security engineers</p>
+          <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">High-density vulnerability triage table for SOC analysts & security engineers</p>
         </div>
 
         {/* Filters Bar */}
         <div className="flex flex-wrap items-center gap-2 text-[11px]">
           {/* Search Box */}
           <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-2.5 top-2 text-slate-500" />
+            <Search className="w-3.5 h-3.5 absolute left-2.5 top-2 text-slate-400" />
             <input
               type="text"
               placeholder="Search findings..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-cyber-bg border border-cyber-border rounded pl-8 pr-3 py-1 text-slate-200 placeholder-slate-500 outline-none w-48 focus:border-blue-500"
+              className="bg-white dark:bg-[#090d16] border border-slate-300 dark:border-slate-700 rounded pl-8 pr-3 py-1 text-slate-800 dark:text-slate-200 placeholder-slate-400 outline-none w-48 focus:border-blue-500"
             />
           </div>
 
@@ -108,7 +108,7 @@ export const Findings: React.FC = () => {
           <select
             value={severityFilter}
             onChange={(e) => setSeverityFilter(e.target.value)}
-            className="bg-cyber-bg text-slate-200 border border-cyber-border px-2 py-1 rounded outline-none"
+            className="bg-white dark:bg-[#090d16] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 px-2 py-1 rounded outline-none"
           >
             <option value="">SEVERITY: ALL</option>
             <option value="Critical">CRITICAL</option>
@@ -121,7 +121,7 @@ export const Findings: React.FC = () => {
           <select
             value={protocolFilter}
             onChange={(e) => setProtocolFilter(e.target.value)}
-            className="bg-cyber-bg text-slate-200 border border-cyber-border px-2 py-1 rounded outline-none"
+            className="bg-white dark:bg-[#090d16] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 px-2 py-1 rounded outline-none"
           >
             <option value="">PROTOCOL: ALL</option>
             <option value="SMTP">SMTP</option>
@@ -132,33 +132,33 @@ export const Findings: React.FC = () => {
       </div>
 
       {/* Findings Data Table */}
-      <div className="bg-cyber-panel border border-cyber-border rounded overflow-hidden shadow-xl">
+      <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-[#1e293b] rounded overflow-hidden shadow-xs">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-900/90 border-b border-cyber-border text-slate-400 uppercase text-[10px] tracking-wider">
+            <tr className="bg-slate-50 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 uppercase text-[10px] tracking-wider">
               <th className="py-2.5 px-3 w-8"></th>
               <th
                 onClick={() => toggleSort('severity')}
-                className="py-2.5 px-3 cursor-pointer hover:text-slate-200 select-none"
+                className="py-2.5 px-3 cursor-pointer hover:text-slate-900 dark:hover:text-slate-200 select-none"
               >
                 <div className="flex items-center gap-1">
-                  Severity <ArrowUpDown className="w-3 h-3 text-slate-600" />
+                  Severity <ArrowUpDown className="w-3 h-3 text-slate-400" />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('title')}
-                className="py-2.5 px-3 cursor-pointer hover:text-slate-200 select-none"
+                className="py-2.5 px-3 cursor-pointer hover:text-slate-900 dark:hover:text-slate-200 select-none"
               >
                 <div className="flex items-center gap-1">
-                  Finding <ArrowUpDown className="w-3 h-3 text-slate-600" />
+                  Finding <ArrowUpDown className="w-3 h-3 text-slate-400" />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('protocol')}
-                className="py-2.5 px-3 cursor-pointer hover:text-slate-200 select-none"
+                className="py-2.5 px-3 cursor-pointer hover:text-slate-900 dark:hover:text-slate-200 select-none"
               >
                 <div className="flex items-center gap-1">
-                  Protocol <ArrowUpDown className="w-3 h-3 text-slate-600" />
+                  Protocol <ArrowUpDown className="w-3 h-3 text-slate-400" />
                 </div>
               </th>
               <th className="py-2.5 px-3">Sessions</th>
@@ -166,59 +166,59 @@ export const Findings: React.FC = () => {
               <th className="py-2.5 px-3 text-right">Digest</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-cyber-border text-slate-300">
+          <tbody className="divide-y divide-slate-200 dark:divide-slate-800/80 text-slate-800 dark:text-slate-300">
             {filteredFindings.map((f) => {
               const isExpanded = expandedId === f.id;
               return (
                 <React.Fragment key={f.id}>
                   <tr
                     onClick={() => setExpandedId(isExpanded ? null : f.id)}
-                    className="hover:bg-slate-800/50 cursor-pointer transition-colors"
+                    className="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors"
                   >
-                    <td className="py-2 px-3 text-slate-500 text-center">
+                    <td className="py-2 px-3 text-slate-400 text-center">
                       {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
                     </td>
                     <td className="py-2 px-3">
                       <SeverityBadge severity={f.severity} />
                     </td>
-                    <td className="py-2 px-3 font-semibold text-slate-100 font-sans">
+                    <td className="py-2 px-3 font-semibold text-slate-900 dark:text-slate-100 font-sans">
                       {f.title}
-                      <span className="ml-2 text-[10px] text-slate-400 font-mono">[{f.category}]</span>
+                      <span className="ml-2 text-[10px] text-slate-500 font-mono">[{f.category}]</span>
                     </td>
-                    <td className="py-2 px-3 font-bold text-blue-400">{f.protocol}</td>
-                    <td className="py-2 px-3 font-mono text-slate-300">{f.affectedSessions}</td>
+                    <td className="py-2 px-3 font-bold text-blue-600 dark:text-blue-400">{f.protocol}</td>
+                    <td className="py-2 px-3 font-mono text-slate-700 dark:text-slate-300">{f.affectedSessions}</td>
                     <td className="py-2 px-3">
                       <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-semibold border ${
                         f.status === 'Open'
-                          ? 'bg-red-950/60 text-red-400 border-red-800/60'
-                          : 'bg-amber-950/60 text-amber-400 border-amber-800/60'
+                          ? 'bg-rose-100 dark:bg-red-950/60 text-rose-700 dark:text-red-400 border-rose-300 dark:border-red-800/60'
+                          : 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400 border-amber-300 dark:border-amber-800/60'
                       }`}>
                         {f.status}
                       </span>
                     </td>
-                    <td className="py-2 px-3 text-right text-slate-400 font-mono text-[10px]">
+                    <td className="py-2 px-3 text-right text-slate-500 dark:text-slate-400 font-mono text-[10px]">
                       {f.hash.substring(0, 12)}...
                     </td>
                   </tr>
 
                   {/* Expanded Detail Panel */}
                   {isExpanded && (
-                    <tr className="bg-slate-900/80">
-                      <td colSpan={7} className="p-4 space-y-2 border-b border-cyber-border font-sans text-xs">
+                    <tr className="bg-slate-50 dark:bg-slate-900/80">
+                      <td colSpan={7} className="p-4 space-y-2 border-b border-slate-200 dark:border-slate-800 font-sans text-xs">
                         <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400 uppercase font-semibold block">Detailed Description:</span>
-                          <p className="text-slate-300">{f.description}</p>
+                          <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase font-semibold block">Detailed Description:</span>
+                          <p className="text-slate-800 dark:text-slate-300">{f.description}</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                          <div className="bg-cyber-bg p-2.5 rounded border border-cyber-border space-y-1 font-mono text-[11px]">
-                            <span className="text-slate-400 text-[10px] uppercase block font-semibold">Observed Evidence:</span>
-                            <p className="text-slate-200">{f.evidence}</p>
+                          <div className="bg-white dark:bg-[#090d16] p-2.5 rounded border border-slate-200 dark:border-slate-800 space-y-1 font-mono text-[11px]">
+                            <span className="text-slate-500 dark:text-slate-400 text-[10px] uppercase block font-semibold">Observed Evidence:</span>
+                            <p className="text-slate-800 dark:text-slate-200">{f.evidence}</p>
                           </div>
 
-                          <div className="bg-blue-950/30 border border-blue-800/40 p-2.5 rounded space-y-1 font-mono text-[11px]">
-                            <span className="text-blue-400 text-[10px] uppercase block font-semibold">Recommended Remediation:</span>
-                            <p className="text-slate-200">{f.recommendation}</p>
+                          <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/40 p-2.5 rounded space-y-1 font-mono text-[11px]">
+                            <span className="text-blue-700 dark:text-blue-400 text-[10px] uppercase block font-semibold">Recommended Remediation:</span>
+                            <p className="text-slate-800 dark:text-slate-200">{f.recommendation}</p>
                           </div>
                         </div>
                       </td>

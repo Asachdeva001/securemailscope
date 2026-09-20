@@ -1,0 +1,11 @@
+.git/
+.gitignore
+venv/
+env/
+__pycache__/
+*.pyc
+*.joblib
+data/pcaps/
+data/reports/
+.pytest_cache/
+*.db

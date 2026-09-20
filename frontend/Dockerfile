@@ -1,4 +1,5 @@
-FROM node:20-alpine
+# Stage 1: Build React assets
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -7,6 +8,17 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+ARG VITE_API_BASE_URL=https://securemailscope-backend-454069237379.us-central1.run.app/api/v1
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+RUN npm run build
+
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]

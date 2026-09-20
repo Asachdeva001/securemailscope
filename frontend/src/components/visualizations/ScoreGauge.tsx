@@ -27,22 +27,22 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label = "SECURITY
   };
 
   return (
-    <div className="bg-cyber-panel border border-cyber-border rounded p-4 font-mono space-y-3">
-      <div className="flex items-center justify-between border-b border-cyber-border pb-2">
-        <span className="text-xs uppercase tracking-wider text-slate-300 font-bold flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-blue-400" /> {label}
+    <div className="bg-white dark:bg-[#121824] border border-slate-200 dark:border-[#1e293b] rounded p-4 font-mono space-y-3 shadow-xs">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+        <span className="text-xs uppercase tracking-wider text-slate-800 dark:text-slate-300 font-bold flex items-center gap-1.5">
+          <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" /> {label}
         </span>
         <button
           onClick={() => setShowMethodology(true)}
-          className="text-[11px] text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1"
+          className="text-[11px] text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 cursor-pointer"
         >
           <Info className="w-3 h-3" /> View scoring methodology
         </button>
       </div>
 
       <div className="flex items-baseline justify-between py-1">
-        <span className="text-3xl font-bold text-slate-100">{roundedScore} <span className="text-sm font-normal text-slate-500">/ 100</span></span>
-        <span className="text-[10px] text-slate-400 border border-slate-700 bg-slate-800 px-2 py-0.5 rounded uppercase">
+        <span className="text-3xl font-bold text-slate-900 dark:text-slate-100">{roundedScore} <span className="text-sm font-normal text-slate-500">/ 100</span></span>
+        <span className="text-[10px] text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded uppercase font-semibold">
           {roundedScore >= 75 ? 'GRADE A - SECURE' : roundedScore >= 50 ? 'GRADE B - ELEVATED RISK' : 'GRADE C - CRITICAL DEVIATIONS'}
         </span>
       </div>
@@ -51,11 +51,11 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label = "SECURITY
       <div className="space-y-2 pt-1 text-xs">
         {subScores.map((item) => (
           <div key={item.label} className="space-y-1">
-            <div className="flex justify-between text-[11px] text-slate-300">
+            <div className="flex justify-between text-[11px] text-slate-700 dark:text-slate-300">
               <span>{item.label}</span>
               <span className="font-semibold">{item.val}</span>
             </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700/50">
               <div
                 className={`h-full ${getBarColor(item.val)} transition-all duration-500`}
                 style={{ width: `${item.val}%` }}

@@ -28,21 +28,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeInvestigationName, onDemoL
   };
 
   return (
-    <header className="h-14 bg-slate-900 dark:bg-[#090d16] border-b border-slate-200 dark:border-[#1e293b] px-4 flex items-center justify-between sticky top-0 z-40 transition-colors font-mono text-xs">
+    <header className="h-14 bg-white dark:bg-[#090d16] border-b border-slate-200 dark:border-[#1e293b] px-4 flex items-center justify-between sticky top-0 z-40 transition-colors font-mono text-xs shadow-xs">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-          <Shield className="w-4 h-4 text-blue-500" />
+          <Shield className="w-4 h-4 text-blue-600 dark:text-blue-500" />
           <span className="font-bold text-slate-900 dark:text-white tracking-wide">SecureMailScope</span>
         </div>
 
-        <span className="text-slate-600 dark:text-slate-600">/</span>
+        <span className="text-slate-400 dark:text-slate-600">/</span>
 
         <div className="flex items-center gap-2">
-          <span className="text-slate-400">Investigation:</span>
-          <span className="text-slate-200 font-semibold bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/80 text-[11px] truncate max-w-[260px]">
+          <span className="text-slate-500 dark:text-slate-400">Investigation:</span>
+          <span className="text-slate-800 dark:text-slate-200 font-semibold bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 rounded border border-slate-300 dark:border-slate-700/80 text-[11px] truncate max-w-[260px]">
             {activeInvestigationName || 'INV-2026-0042'}
           </span>
-          <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">
+          <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">
             [READY]
           </span>
         </div>
@@ -52,16 +52,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeInvestigationName, onDemoL
         <button
           onClick={toggleTheme}
           title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-          className="p-1.5 rounded bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors text-[11px] font-mono flex items-center gap-1"
+          className="p-1.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-[11px] font-mono flex items-center gap-1 cursor-pointer"
         >
           {theme === 'dark' ? (
             <>
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
+              <Sun className="w-3.5 h-3.5 text-amber-500" />
               <span>LIGHT</span>
             </>
           ) : (
             <>
-              <Moon className="w-3.5 h-3.5 text-blue-400" />
+              <Moon className="w-3.5 h-3.5 text-blue-600" />
               <span>DARK</span>
             </>
           )}
@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeInvestigationName, onDemoL
         <button
           onClick={handleLoadDemo}
           disabled={loading}
-          className="flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white font-mono text-[11px] rounded transition-colors disabled:opacity-50"
+          className="flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white font-mono text-[11px] rounded transition-colors disabled:opacity-50 cursor-pointer"
         >
           <Play className="w-3 h-3 fill-white" />
           {loading ? 'LOADING...' : 'LOAD DEMO'}
@@ -78,14 +78,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeInvestigationName, onDemoL
 
         <button
           onClick={() => navigate('/upload')}
-          className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] rounded border border-slate-700 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-[11px] rounded border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
         >
-          <Upload className="w-3 h-3 text-slate-400" />
+          <Upload className="w-3 h-3 text-slate-500 dark:text-slate-400" />
           INGEST PCAP
         </button>
 
-        <div className="pl-2 border-l border-slate-800 text-[11px] text-slate-400">
-          Analyst: <span className="text-slate-200 font-semibold">SOC_LVL2</span>
+        <div className="pl-2 border-l border-slate-300 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
+          Analyst: <span className="text-slate-800 dark:text-slate-200 font-semibold">SOC_LVL2</span>
         </div>
       </div>
     </header>
